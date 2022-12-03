@@ -3,8 +3,10 @@ package com.freenow.service.driver;
 import com.freenow.dataaccessobject.DriverRepository;
 import com.freenow.domainobject.CarDO;
 import com.freenow.domainobject.DriverDO;
+import com.freenow.domainvalue.CarStatut;
 import com.freenow.domainvalue.GeoCoordinate;
 import com.freenow.domainvalue.OnlineStatus;
+import com.freenow.exception.CarAlreadyInUseException;
 import com.freenow.exception.ConstraintsViolationException;
 import com.freenow.exception.EntityNotFoundException;
 import java.util.List;
@@ -129,8 +131,9 @@ public class DefaultDriverService implements DriverService
     public void selectCarByDriver(long driverId, long carId) throws EntityNotFoundException
     {
         DriverDO driverDO = findDriverChecked(driverId);
-
         CarDO carDO = carService.find(carId);
+        if (carDO.getCarStatut() == CarStatut.BUSY)
+            new CarAlreadyInUseException("The car is busy and its id is : " + carId);
 
         driverDO.setCarDO(carDO);
     }

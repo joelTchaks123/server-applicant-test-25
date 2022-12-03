@@ -4,6 +4,7 @@ import com.freenow.controller.mapper.DriverMapper;
 import com.freenow.datatransferobject.DriverDTO;
 import com.freenow.domainobject.DriverDO;
 import com.freenow.domainvalue.OnlineStatus;
+import com.freenow.exception.CarAlreadyInUseException;
 import com.freenow.exception.ConstraintsViolationException;
 import com.freenow.exception.EntityNotFoundException;
 import com.freenow.service.driver.DriverService;
