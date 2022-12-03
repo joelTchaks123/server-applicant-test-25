@@ -43,13 +43,6 @@ values
 
 -- //////////////  task 1
 
---Create 2 ONLINE driver with map car
-insert into driver (id, date_created, deleted, online_status, password, username, car_id) values (9, now(), false, 'ONLINE',
-'driver09pw', 'driver09', 3);
-
-insert into driver (id, date_created, deleted, online_status, password, username, car_id) values (10, now(), false, 'ONLINE',
-'driver10pw', 'driver10', 4);
-
 -- Create 1 Electric Cars
 insert into car (CAR_ID , CAR_STATUT , CONVERTIBLE , DATE_CREATED , DELETED , ENGINE_TYPE , LICENSE_PLATE , RATING, SEAT_COUNT , MANUFACTURERDO_ID  )
 values (1, 'FREE', false, now(), false,  'ELECTRIC', 'HHK7431', 4.1, 4, null);
@@ -65,4 +58,9 @@ values (3, 'BUSY', false, now(), false,  'ELECTRIC', 'HHK7410', 4.1, 4, null);
 insert into car (CAR_ID , CAR_STATUT , CONVERTIBLE , DATE_CREATED , DELETED , ENGINE_TYPE , LICENSE_PLATE , RATING, SEAT_COUNT , MANUFACTURERDO_ID  )
 values (4, 'BUSY', false, now(), false,  'ELECTRIC', 'HHK7465', 4.1, 4, null);
 
+--Create 2 ONLINE driver with map car
+insert into driver (id, date_created, deleted, online_status, password, username, car_id) values (9, now(), false, 'ONLINE',
+'driver09pw', 'driver09', 3);
 
+insert into driver (id, date_created, deleted, online_status, password, username, car_id) values (10, now(), false, 'ONLINE',
+'driver10pw', 'driver10', 4);
