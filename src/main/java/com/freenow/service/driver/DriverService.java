@@ -2,6 +2,7 @@ package com.freenow.service.driver;
 
 import com.freenow.domainobject.DriverDO;
 import com.freenow.domainvalue.OnlineStatus;
+import com.freenow.exception.CarAlreadyInUseException;
 import com.freenow.exception.ConstraintsViolationException;
 import com.freenow.exception.EntityNotFoundException;
 import java.util.List;
@@ -19,8 +20,8 @@ public interface DriverService
 
     List<DriverDO> find(OnlineStatus onlineStatus);
 
-    void selectCarByDriver(long driverId, long carId) throws EntityNotFoundException;
+    void selectCarByDriver(long driverId, long carId) throws EntityNotFoundException, ConstraintsViolationException, CarAlreadyInUseException;
 
-    void unSelectCarByDriver(long driverId) throws EntityNotFoundException;
+    void unSelectCarByDriver(long driverId) throws EntityNotFoundException, ConstraintsViolationException;
 
 }

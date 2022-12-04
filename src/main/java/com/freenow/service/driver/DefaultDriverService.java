@@ -128,14 +128,18 @@ public class DefaultDriverService implements DriverService
      */
     @Override
     @Transactional
-    public void selectCarByDriver(long driverId, long carId) throws EntityNotFoundException
+    public void selectCarByDriver(long driverId, long carId) throws EntityNotFoundException, ConstraintsViolationException, CarAlreadyInUseException
     {
         DriverDO driverDO = findDriverChecked(driverId);
+        if  (driverDO.getDeleted() || driverDO.getOnlineStatus() == OnlineStatus.OFFLINE) {
+            throw new ConstraintsViolationException("Driver must be ONLINE to select a car");
+        }
         CarDO carDO = carService.find(carId);
-        if (carDO.getCarStatut() == CarStatut.BUSY)
-            new CarAlreadyInUseException("The car is busy and its id is : " + carId);
-
+        if (carDO.getCarStatut() == CarStatut.BUSY) {
+           throw new CarAlreadyInUseException("The car is busy and its id is : " + carId);
+        }
         driverDO.setCarDO(carDO);
+        carDO.setCarStatut(CarStatut.BUSY);
     }
 
 
@@ -147,10 +151,16 @@ public class DefaultDriverService implements DriverService
      */
     @Override
     @Transactional
-    public void unSelectCarByDriver(long driverId) throws EntityNotFoundException
+    public void unSelectCarByDriver(long driverId) throws EntityNotFoundException, ConstraintsViolationException
     {
         DriverDO driverDO = findDriverChecked(driverId);
+        if  (driverDO.getDeleted() || driverDO.getOnlineStatus() == OnlineStatus.OFFLINE)
+            throw new ConstraintsViolationException("Driver must be ONLINE to unselect a car");
 
+        if  (driverDO.getCarDO() == null)
+            throw new ConstraintsViolationException("This Driver doesn't have the car to unselect a car");
+
+        driverDO .getCarDO().setCarStatut(CarStatut.FREE);
         driverDO.setCarDO(null);
     }
 

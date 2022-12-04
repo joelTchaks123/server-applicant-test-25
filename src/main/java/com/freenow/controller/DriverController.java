@@ -81,7 +81,7 @@ public class DriverController
     }
     @PutMapping("/{driverId}/cars/{carId}")
     public void selectCarByDriver (@Valid @PathVariable long driverId, @Valid @PathVariable long carId)
-            throws EntityNotFoundException
+            throws EntityNotFoundException, ConstraintsViolationException, CarAlreadyInUseException
     {
         driverService.selectCarByDriver(driverId, carId);
     }

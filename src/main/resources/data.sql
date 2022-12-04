@@ -10,7 +10,7 @@ insert into driver (id, date_created, deleted, online_status, password, username
 insert into driver (id, date_created, deleted, online_status, password, username) values (2, now(), false, 'OFFLINE',
 'driver02pw', 'driver02');
 
-insert into driver (id, date_created, deleted, online_status, password, username) values (3, now(), false, 'OFFLINE',
+insert into driver (id, date_created, deleted, online_status, password, username) values (3, now(), true, 'OFFLINE',
 'driver03pw', 'driver03');
 
 
