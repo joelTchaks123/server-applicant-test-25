@@ -2,6 +2,8 @@ package com.freenow.datatransferobject;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.freenow.domainvalue.CarStatut;
+import com.freenow.domainvalue.EngineType;
 
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -12,20 +14,26 @@ public class CarDTO {
     @NotNull(message = "Username can not be null!")
     private String licensePlate;
 
-//    private Integer seatCount;
-//
-//    private Boolean convertible;
-//
-//    private BigDecimal rating;
+    private Integer seatCount;
 
-//    private EngineType engineType;
-//
-//    private CarStatut carStatut;
-//
-//    private ManufacturerDO manufacturerDO;
+    private BigDecimal rating;
+
+    private EngineType engineType;
+
+    private CarStatut carStatut;
+
 
 
     public CarDTO() {
+    }
+
+    public CarDTO(Long id, String licensePlate, Integer seatCount, BigDecimal rating, EngineType engineType, CarStatut carStatut) {
+        this.id = id;
+        this.licensePlate = licensePlate;
+        this.seatCount = seatCount;
+        this.rating = rating;
+        this.engineType = engineType;
+        this.carStatut = carStatut;
     }
 
     private CarDTO(Long id, String licensePlate) {
@@ -44,13 +52,35 @@ public class CarDTO {
     public String getLicensePlate() {
         return licensePlate;
     }
-    
+
+    public Integer getSeatCount() {
+        return seatCount;
+    }
+
+    public BigDecimal getRating() {
+        return rating;
+    }
+
+    public EngineType getEngineType() {
+        return engineType;
+    }
+
+    public CarStatut getCarStatut() {
+        return carStatut;
+    }
+
     public static class CarDTOBuilder
     {
         private Long id;
         private String licensePlate;
 
+        private Integer seatCount;
 
+        private BigDecimal rating;
+
+        private EngineType engineType;
+
+        private CarStatut carStatut;
         public CarDTO.CarDTOBuilder setId(Long id)
         {
             this.id = id;
@@ -64,10 +94,29 @@ public class CarDTO {
             return this;
         }
 
+        public CarDTO.CarDTOBuilder setSeatCount(Integer seatCount) {
+            this.seatCount = seatCount;
+            return this;
+        }
+
+        public CarDTO.CarDTOBuilder setRating(BigDecimal rating) {
+            this.rating = rating;
+            return this;
+        }
+
+        public CarDTO.CarDTOBuilder setEngineType(EngineType engineType) {
+            this.engineType = engineType;
+            return this;
+        }
+
+        public CarDTO.CarDTOBuilder setCarStatut(CarStatut carStatut) {
+            this.carStatut = carStatut;
+            return this;
+        }
 
         public CarDTO createCarDTO()
         {
-            return new CarDTO(id, licensePlate);
+            return new CarDTO(id, licensePlate, seatCount, rating, engineType, carStatut);
         }
 
     }

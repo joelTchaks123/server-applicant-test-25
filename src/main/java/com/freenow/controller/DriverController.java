@@ -88,7 +88,7 @@ public class DriverController
 
     @DeleteMapping ("/{driverId}/cars")
     public void unSelectCarByDriver (@Valid @PathVariable long driverId)
-            throws EntityNotFoundException
+            throws EntityNotFoundException, ConstraintsViolationException
     {
         driverService.unSelectCarByDriver(driverId);
     }

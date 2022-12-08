@@ -98,11 +98,13 @@ public class DefaultCarService implements CarService
      */
     @Override
     @Transactional
-    public void updateInfoCar(long carId, BigDecimal rating, CarStatut carStatut) throws EntityNotFoundException
+    public void updateInfoCar(long carId, BigDecimal rating, CarStatut carStatut) throws EntityNotFoundException, ConstraintsViolationException
     {
-        CarDO CarDO = findCarChecked(carId);
-        CarDO.setRating(rating);
-        CarDO.setCarStatut(carStatut);
+        CarDO carDO = findCarChecked(carId);
+        if (carDO.getDeleted())
+            throw new ConstraintsViolationException("This car is deleted");
+        carDO.setRating(rating);
+        carDO.setCarStatut(carStatut);
     }
 
 

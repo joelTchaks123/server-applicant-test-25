@@ -61,7 +61,7 @@ public class CarCRUDController {
 //                              @RequestParam BigDecimal rating, @RequestParam CarStatut carStatut)
     @PutMapping("/{carId}")
     public void updateInfoCar(@PathVariable long carId, @RequestParam BigDecimal rating, @RequestParam CarStatut carStatut)
-            throws EntityNotFoundException
+            throws EntityNotFoundException, ConstraintsViolationException
     {
         carService.updateInfoCar(carId, rating, carStatut);
     }

@@ -18,7 +18,7 @@ public interface CarService
 
     void delete(Long carId) throws EntityNotFoundException;
 
-    void updateInfoCar(long carId, BigDecimal rating, CarStatut carStatut) throws EntityNotFoundException;
+    void updateInfoCar(long carId, BigDecimal rating, CarStatut carStatut) throws EntityNotFoundException, ConstraintsViolationException;
 
     List<CarDO> find(CarStatut carStatut);
 
