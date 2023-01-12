@@ -4,14 +4,21 @@ import com.freenow.controller.mapper.DriverMapper;
 import com.freenow.datatransferobject.DriverDTO;
 import com.freenow.domainobject.DriverDO;
 import com.freenow.domainvalue.OnlineStatus;
+import com.freenow.domainvalue.search.SearchRequest;
 import com.freenow.exception.CarAlreadyInUseException;
 import com.freenow.exception.ConstraintsViolationException;
 import com.freenow.exception.EntityNotFoundException;
 import com.freenow.service.driver.DriverService;
+
+
 import java.util.List;
 import javax.validation.Valid;
+
+import com.freenow.service.driver.DefaultDriverSearchService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,6 +41,8 @@ public class DriverController
 
     private final DriverService driverService;
 
+@Autowired
+    private DefaultDriverSearchService driverSearchService;
 
     @Autowired
     public DriverController(final DriverService driverService)
@@ -48,6 +57,17 @@ public class DriverController
         return DriverMapper.makeDriverDTO(driverService.find(driverId));
     }
 
+
+    //generic API search
+    @PostMapping(value = "/search", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Page<DriverDO> search(@RequestBody SearchRequest request) {
+        return driverSearchService.searchDriver(request);
+    }
+
+//    @GetMapping(value = "/search", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+//    public Page<DriverDO> search(@RequestBody SearchRequest request) {
+//        return driverSearchService.searchDriver(request);
+//    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -86,7 +106,7 @@ public class DriverController
         driverService.selectCarByDriver(driverId, carId);
     }
 
-    @DeleteMapping ("/{driverId}/cars")
+    @PutMapping ("/{driverId}/cars")
     public void unSelectCarByDriver (@Valid @PathVariable long driverId)
             throws EntityNotFoundException, ConstraintsViolationException
     {

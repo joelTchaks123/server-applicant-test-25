@@ -3,6 +3,8 @@ package com.freenow.controller.mapper;
 import com.freenow.datatransferobject.DriverDTO;
 import com.freenow.domainobject.DriverDO;
 import com.freenow.domainvalue.GeoCoordinate;
+import org.springframework.data.domain.Page;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,7 +37,12 @@ public class DriverMapper
     public static List<DriverDTO> makeDriverDTOList(Collection<DriverDO> drivers)
     {
         return drivers.stream()
-            .map(DriverMapper::makeDriverDTO)
+                .map(DriverMapper::makeDriverDTO)
             .collect(Collectors.toList());
+    }
+
+    public static Page<DriverDTO> makeDriverDTOPage(Page<DriverDO> pageDriverDO)
+    {
+        return pageDriverDO.map(DriverMapper::makeDriverDTO);
     }
 }

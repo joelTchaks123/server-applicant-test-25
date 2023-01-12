@@ -134,8 +134,8 @@ public class DefaultDriverService implements DriverService
         if  (driverDO.getDeleted() || driverDO.getOnlineStatus() == OnlineStatus.OFFLINE) {
             throw new ConstraintsViolationException("Driver must be ONLINE to select a car");
         }
-
-        driverDO.getCarDO().setCarStatut(CarStatut.FREE);
+        if (driverDO.getCarDO() != null)
+            driverDO.getCarDO().setCarStatut(CarStatut.FREE);
         CarDO carDO = carService.find(carId);
         if (carDO.getDeleted() || carDO.getCarStatut() == CarStatut.BUSY) {
            throw new CarAlreadyInUseException("The car is busy or deleted and its id is : " + carId);
