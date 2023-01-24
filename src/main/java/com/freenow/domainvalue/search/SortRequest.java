@@ -24,4 +24,19 @@ public class SortRequest implements Serializable {
 
     private SortDirection direction;
 
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public SortDirection getDirection() {
+        return direction;
+    }
+
+    public void setDirection(SortDirection direction) {
+        this.direction = direction;
+    }
 }

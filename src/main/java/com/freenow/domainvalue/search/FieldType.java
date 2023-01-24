@@ -4,6 +4,7 @@ import com.freenow.domainvalue.GeoCoordinate;
 import com.freenow.domainvalue.OnlineStatus;
 import lombok.extern.slf4j.Slf4j;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -29,7 +30,7 @@ public enum FieldType {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
                 date = LocalDateTime.parse(value, formatter);
             } catch (Exception e) {
-                log.info("Failed parse field type DATE {}", e.getMessage());
+//                log.info("Failed parse field type DATE {}", e.getMessage());
             }
 
             return date;
@@ -59,16 +60,31 @@ public enum FieldType {
             return value;
         }
     },
-    OnlineStatus{
+    ONLINESTATUS {
         public Object parse(String value) {
             return com.freenow.domainvalue.OnlineStatus.valueOf(value);
         }
     },
-    GeoCoordinate{
+    GEOCOORDINATE {
         public Object parse(String value) {
             String [] latLong = value.split(",");
             com.freenow.domainvalue.GeoCoordinate coordinate = new GeoCoordinate(Double.parseDouble(latLong[0]), Double.parseDouble(latLong[1]) );
             return coordinate;
+        }
+    },
+    CARSTATUS {
+        public Object parse(String value) {
+            return com.freenow.domainvalue.CarStatut.valueOf(value);
+        }
+    },
+    ENGINETYPE {
+        public Object parse(String value) {
+            return com.freenow.domainvalue.EngineType.valueOf(value);
+        }
+    },
+    BIGDECIMAL {
+        public Object parse(String value) {
+            return BigDecimal.valueOf(Double.valueOf(value));
         }
     };
 

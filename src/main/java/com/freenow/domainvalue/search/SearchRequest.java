@@ -42,4 +42,11 @@ public class SearchRequest implements Serializable {
         return this.sorts;
     }
 
+    public Integer getPage() {
+        return page;
+    }
+
+    public Integer getSize() {
+        return size;
+    }
 }

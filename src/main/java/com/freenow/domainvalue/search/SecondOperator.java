@@ -61,7 +61,7 @@ public enum SecondOperator {
                 return cb.and(cb.and(cb.ge(key, start), cb.le(key, end)), predicate);
             }
 
-            log.info("Can not use between for {} field type.", request.getFieldType());
+//            log.info("Can not use between for {} field type.", request.getFieldType());
             return predicate;
         }
     };

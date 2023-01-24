@@ -1,6 +1,7 @@
 package com.freenow.domainvalue.search;
 
 import lombok.extern.slf4j.Slf4j;
+import lombok.extern.slf4j.*;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.Expression;
@@ -8,6 +9,8 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.time.LocalDateTime;
 import java.util.List;
+
+import com.freenow.domainvalue.search.FilterRequest;
 
 @Slf4j
 public enum Operator {
@@ -64,7 +67,7 @@ public enum Operator {
                 return cb.and(cb.and(cb.ge(key, start), cb.le(key, end)), predicate);
             }
 
-            log.info("Can not use between for {} field type.", request.getFieldType());
+//            log.info("Can not use between for {} field type.", request.getFieldType());
             return predicate;
         }
     };
